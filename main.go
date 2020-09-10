@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/enitt-dev/go-utils/convert"
@@ -35,9 +34,8 @@ func main() {
 	for {
 		select {
 		case recvBytes := <-validatorQ:
-			fmt.Println(convert.BytesToHexStrings(recvBytes))
-			// case msg2 := <-validatorQ:
-			//     fmt.Println("received", msg2)
+			log.Println(convert.BytesToHexStrings(recvBytes))
+
 		}
 	}
 }
