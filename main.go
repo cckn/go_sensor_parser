@@ -21,8 +21,7 @@ var sensorTypeMap = map[int]string{
 }
 
 type sensorData struct {
-	DeviceId uint `json:"deviceId"`
-	// data     map[string]float32
+	DeviceId   uint    `json:"deviceId"`
 	SensorType string  `json:"sensor"`
 	Value      float32 `json:"value"`
 }
@@ -65,34 +64,18 @@ func main() {
 					SensorType: sensorTypeMap[int(bytes[4])],
 					Value:      convert.BytesToFloat32(bytes[6:]),
 				}
-				// log.Println(sd)
 
 				b, _ := json.Marshal(sd)
 				j := string(append(b, '\n'))
 				log.Print(j)
 				writeToFile(j)
-				// sensorDataArr = append(sensorDataArr, sd)
 			}
-			// log.Println(sensorDataArr)
-
 		}
 	}
 }
 
 func writeToFile(msg string) {
 	const fileName = "/home/pi/sensorlog/sensorData6.log"
-	//
-	// // file, error := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE, 0777)
-	// // if error != nil {
-	// //     panic(error)
-	// // }
-	// //
-	// // defer file.Close()
-	// err := ioutil.WriteFile(fileName, []byte(msg), os.FileMode(777))
-	// // _, err := file.WriteString(msg)
-	// if err != nil {
-	//     log.Println(err)
-	// }
 
 	f, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0777)
 	if err != nil {
